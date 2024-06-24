@@ -1,5 +1,7 @@
 package com.generation.pokemarket.models;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -11,6 +13,14 @@ public class MetodoPago {
     private Long id;
     @Column(name = "nombre")
     private String nombreMetodo;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    //Un método de pago puede tener muchos pedidos
+    @OneToMany(mappedBy = "metodoPago")
+    private List<Pedido> pedidos;
 
     // Constructor sin argumentos
     public MetodoPago() {
